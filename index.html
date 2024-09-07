@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BruteX - Meme Token</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #FF4136;
+            --secondary-color: #FFDC00;
+            --accent-color: #2ECC40;
+            --background-color: #F3F3F3;
+            --text-color: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Bangers', cursive;
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            text-shadow: 2px 2px 0 var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .hero {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Bangers', cursive;
+            font-size: 5rem;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0 var(--accent-color);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-family: 'Bangers', cursive;
+            font-size: 3rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .tokenomics-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .tokenomics-list li {
+            background-color: var(--secondary-color);
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .tokenomics-list li:hover {
+            transform: translateX(10px);
+        }
+
+        .how-to-buy-steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .step-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 200px;
+            transition: transform 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .step-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .roadmap {
+            position: relative;
+        }
+
+        .roadmap::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background-color: var(--primary-color);
+        }
+
+        .roadmap-item {
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .roadmap-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 45%;
+            margin-left: auto;
+            position: relative;
+        }
+
+        .roadmap-item:nth-child(even) .roadmap-content {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        .roadmap-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+        }
+
+        .roadmap-item:nth-child(odd) .roadmap-content::before {
+            left: -30px;
+        }
+
+        .roadmap-item:nth-child(even) .roadmap-content::before {
+            right: -30px;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .token-address {
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .copy-icon {
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-brutex {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%23FFDC00"/><circle cx="35" cy="40" r="5" fill="%23333"/><circle cx="65" cy="40" r="5" fill="%23333"/><path d="M30 65 Q50 80 70 65" stroke="%23333" stroke-width="5" fill="none"/><rect x="40" y="10" width="20" height="10" fill="%232ECC40"/></svg>');
+            background-size: contain;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        #brutex1 { top: 10%; left: 10%; }
+        #brutex2 { top: 30%; right: 15%; animation-delay: -2s; }
+        #brutex3 { bottom: 20%; left: 20%; animation-delay: -4s; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">BruteX</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#tokenomics">Tokenomics</a>
+                <a href="#how-to-buy">How to Buy</a>
+                <a href="#roadmap">Roadmap</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="floating-brutex" id="brutex1"></div>
+            <div class="floating-brutex" id="brutex2"></div>
+            <div class="floating-brutex" id="brutex3"></div>
+            <div class="hero-content">
+                <h1>BruteX</h1>
+                <p>Unleash the beast of the crypto streets!</p>
+                <button class="cta-button pulse">Join the BruteX Party!</button>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">About BruteX</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>BruteX is the meme coin that packs a celebrity punch and takes humor to the next level! Ready to laugh your way to moonshots? Join the BruteX party and experience the strength of community-driven crypto fun!</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><rect width='200' height='200' fill='%23F3F3F3'/><circle cx='100' cy='100' r='80' fill='%23FF4136'/><circle cx='70' cy='80' r='15' fill='%23FFDC00'/><circle cx='130' cy='80' r='15' fill='%23FFDC00'/><path d='M60 130 Q100 160 140 130' stroke='%23FFDC00' stroke-width='10' fill='none'/><rect x='80' y='30' width='40' height='20' fill='%232ECC40'/></svg>" alt="BruteX Character">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tokenomics" class="section">
+            <div class="container">
+                <h2 class="section-title">TOKENOMICS</h2>
+                <ul class="tokenomics-list">
+                    <li>Total Supply: 1,000,000,000,000 BRX</li>
+                    <li>Liquidity Lock: 80% locked for 1 year</li>
+                    <li>Marketing Wallet: 10%</li>
+                    <li>Team Allocation: 5%</li>
+                    <li>Community Rewards: 5%</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="how-to-buy" class="section">
+            <div class="container">
+                <h2 class="section-title">HOW TO BUY</h2>
+                <div class="how-to-buy-steps">
+                    <div class="step-card">
+                        <h3>Step 1: Get a Wallet</h3>
+                        <p>Download a reputable Ethereum wallet like MetaMask or Trust Wallet.</p>
+                    </div>
+                    <div class="step-card">
+                        <h3>Step 2: Acquire ETH</h3>
+                        <p>Purchase Ethereum (ETH) from a cryptocurrency exchange like Coinbase or Binance.</p>
+                    </div>
+                    <div class="step-card">
+                        <h3>Step 3: Connect to a DEX</h3>
+                        <p>Connect your wallet to a decentralized exchange (DEX) like Uniswap or SushiSwap.</p>
+                    </div>
+                    <div class="step-card">
+                        <h3>Step 4: Swap ETH for BRX</h3>
+                        <p>Use the DEX's swap feature to exchange your ETH for BRX.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="section">
+            <div class="container">
+                <h2 class="section-title">ROADMAP</h2>
+                <div class="roadmap">
+                    <div class="roadmap-item">
+                        <div class="roadmap-content">
+                            <h3>Phase 1: Launch & Community Building</h3>
+                            <p>We'll launch the token and focus on growing a strong community of BruteX enthusiasts.</p>
+                        </div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-content">
+                            <h3>Phase 2: Marketing & Partnerships</h3>
+                            <p>We'll ramp up marketing efforts and form strategic partnerships with influencers and meme creators.</p>
+                        </div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-content">
+                            <h3>Phase 3: BruteX NFT Collection</h3>
+                            <p>Launch a limited edition BruteX NFT collection featuring our muscular mascot in various hilarious scenarios.</p>
+                        </div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-content">
+                            <h3>Phase 4: BruteX DeFi Platform</h3>
+                            <p>Develop and launch a BruteX-themed DeFi platform with staking and yield farming opportunities.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div
